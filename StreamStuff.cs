@@ -19,7 +19,7 @@ public class StreamStuff{
 
     private int _bufferSize=4096;
 
-    public int LogEveryXMb = 10;
+    public int LogEveryXMb = 50;
 
     public long _LogSplit ;
 
@@ -93,6 +93,11 @@ public class StreamStuff{
         double sec = sp_all.ElapsedMilliseconds/1000d;
         double rate = (FileSize/1024/1024 )/sec;
         Log($"Done in {sp_all.Elapsed} rate: {rate}MB/s");
+
+    }
+
+
+    public void StartRewrite(){
 
     }
 
