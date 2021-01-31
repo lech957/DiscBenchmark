@@ -34,7 +34,7 @@ public class StreamStuff{
         ChunkSize=chunkSize;
         RewriteCount=rewriteCount;
         FilePath=filepath;
-        _LogSplit=(10*1024*1024)/_bufferSize;
+        _LogSplit=(LogEveryXMb*1024*1024);
     }
 
 
@@ -70,12 +70,12 @@ public class StreamStuff{
             sp.Restart();
             while (f.Length < FileSize){
                 if (f.Length > 0 && f.Length % _LogSplit ==0){
-                    f.Flush();
+                    f.Flush(true);
                     sp.Stop();
                     if (sp.ElapsedMilliseconds >0)
                     {
                         decimal speedInMBperSecond = (1000m*_LogSplit / sp.ElapsedMilliseconds) /(1024*1024) ;
-                        Log($"Speed {speedInMBperSecond}MB/s");
+                        Log($"Speed {speedInMBperSecond:0.00}MB/s");
                     }
                     else{
                         Log($"Too fast, took {sp.Elapsed} for {LogEveryXMb}MB");
@@ -86,13 +86,13 @@ public class StreamStuff{
                 f.Write(buffer,0,buffer.Length);
 
             }
-            f.Flush();
+            f.Flush(true);
             sp.Stop();
         }
         sp_all.Stop();
         double sec = sp_all.ElapsedMilliseconds/1000d;
         double rate = (FileSize/1024/1024 )/sec;
-        Log($"Done in {sp_all.Elapsed} rate: {rate}MB/s");
+        Log($"Done in {sp_all.Elapsed} rate: {rate:0.00}MB/s");
 
     }
 
