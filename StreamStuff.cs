@@ -74,8 +74,8 @@ public class StreamStuff{
                     sp.Stop();
                     if (sp.ElapsedMilliseconds >0)
                     {
-                        decimal speedInMBperSecond = ((1000m*_LogSplit) / (1024*1024)) / (sp.ElapsedMilliseconds) ;
-                        Log($"Speed {speedInMBperSecond:2}MB/s");
+                        decimal speedInMBperSecond = (1000m*_LogSplit / sp.ElapsedMilliseconds) /(1024*1024) ;
+                        Log($"Speed {speedInMBperSecond}MB/s");
                     }
                     else{
                         Log($"Too fast, took {sp.Elapsed} for {LogEveryXMb}MB");

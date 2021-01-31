@@ -8,7 +8,7 @@ namespace DiscBenchmark
         {
 
             string filepath = "test.dat";
-            StreamStuff ss = new StreamStuff(filepath,1024*1024*1024*(long)8,8192,1000);
+            StreamStuff ss = new StreamStuff(filepath,1024*1024*1024*(long)2,8192,1000);
             ss.Logging+= (string msg)=>{Console.WriteLine(msg);};
             ss.StartCopy();
 
